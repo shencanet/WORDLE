@@ -1,0 +1,28 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+h1{
+    text-align: center;
+
+}
+.main-container{
+    border: 1px solid red;
+    display: flex; /*todos en linea*/
+    flex-direction: column;/*pone en columnas*/
+    align-items: center;/*centra pantalla*/
+}
+.row{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+
+}
+
+.square{
+    width: 80px;
+    height: 80px;
+    border: none;
+    background-color: bisque;
+    outline: none;
+}
