@@ -10,10 +10,7 @@ let actualRow = document.querySelector(".row");
 
 drawSquares(actualRow);
 listenInput(actualRow);
-
-let focusElement = document.querySelector(".focus");
-//console.log(focusElement)
-focusElement.focus();
+addfocus(actualRow);
 
 function listenInput(actualRow) {
   let squares = actualRow.querySelectorAll(".square");
@@ -23,7 +20,10 @@ function listenInput(actualRow) {
 
   squares.forEach((element) => {
     element.addEventListener("input", (event) => {
-      //recoger datos user
+      console.log(event.inputType)
+      //logica borra letra no rompa array
+      if(event.inputType !== 'deleteContentBackward'){
+              //recoger datos user
       userInput.push(event.target.value.toUpperCase());
       console.log(userInput);
       //pasar siguiente letra
@@ -32,34 +32,36 @@ function listenInput(actualRow) {
       } else {
         let rightIndex = compareArrays(wordArray, userInput);
         rightIndex.forEach((element) => {
-          squares[element].classList.add("green");
-        }); //los Arrays son iguales ha Ganado
+          squares[element].classList.add("green")})
+         //los Arrays son iguales ha Ganado
         if (rightIndex.length == wordArray.length) {
-          resultElement.innerHTML = `<p>Ganaste!!!!!</p>
-          <button class="button">Reiniciar</button>`;
-          return ;
-        }
+          showResult("Ganaste");
+
+          return}
         //CREAR NUEVA FILA
+
         let actualRow = createRow();
+        if(!actualRow){return}
+
         drawSquares(actualRow);
         listenInput(actualRow);
+        addfocus(actualRow);
 
         //CAMBIAR ESTILOS LETRA CORRECT POSICION INCORRECTA
         let existIndexArray = existLetter(wordArray, userInput);
         existIndexArray.forEach((element) => {
-          squares[element].classList.add("gold");
-        });
+          squares[element].classList.add("gold")})
 
-        //PARTIDA GANADA REINICIAR PARTIDA
-        /*
-        let resetBtn = document.querySelector(".button");
-        resetBtn.addEventListener("click", () => {
-          location.reload();
-        });*/
+      }//if
+
+      }else{
+        userInput.pop();
       }
-    });
-  });
-}
+
+
+    })
+  })//squares
+}//funcion
 
 function compareArrays(array1, array2) {
   let equalsIndex = [];
@@ -87,11 +89,15 @@ function existLetter(array1, array2) {
 
 function createRow() {
   rowId++;
-  let newRow = document.createElement("div");
-  newRow.classList.add("row");
-  newRow.setAttribute("id", rowId);
-  mainContainer.appendChild(newRow);
-  return newRow;
+  if (rowId <= 5) {
+    let newRow = document.createElement("div");
+    newRow.classList.add("row");
+    newRow.setAttribute("id", rowId);
+    mainContainer.appendChild(newRow);
+    return newRow;
+  } else {
+    showResult(`La respuesta correcta era "${word.toUpperCase()}" `);
+  }
 }
 
 function drawSquares(actualRow) {
@@ -101,5 +107,20 @@ function drawSquares(actualRow) {
     } else {
       actualRow.innerHTML += `<input type="text" maxlength="1" class="square">`;
     }
+  });
+}
+
+function addfocus(actualRow) {
+  let focusElement = actualRow.querySelector(".focus");
+  //console.log(focusElement)
+  focusElement.focus();
+}
+
+function showResult(textMsg) {
+  resultElement.innerHTML = `<p>${textMsg}</p>
+          <button class="button">Reiniciar</button>`;
+  let resetBtn = document.querySelector(".button");
+  resetBtn.addEventListener("click", () => {
+    location.reload();
   });
 }
