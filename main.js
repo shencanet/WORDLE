@@ -1,4 +1,4 @@
-let resultElement = document.querySelector('.result')
+let resultElement = document.querySelector(".result");
 let word = "texto";
 let wordArray = word.toUpperCase().split("");
 console.log(wordArray);
@@ -29,14 +29,24 @@ squares.forEach((element) => {
     } else {
       let rightIndex = compareArrays(wordArray, userInput);
       rightIndex.forEach((element) => {
-        squares[element].classList.add('green');
-      });//los Arrays son iguales ha Ganado
-      if(rightIndex.length == wordArray.length){
+        squares[element].classList.add("green");
+
+      }); //los Arrays son iguales ha Ganado
+      if (rightIndex.length == wordArray.length) {
         resultElement.innerHTML = `<p>Ganaste!!!!!</p>
-        <button class="button">Reiniciar</button>`
-
+        <button class="button">Reiniciar</button>`;
       }
-
+      //CAMBIAR ESTILOS LETRA CORRECT POSICION INCORRECTA
+     let existIndexArray =   existLetter(wordArray, userInput);
+     existIndexArray.forEach(element => {
+      squares[element].classList.add('gold');
+     })
+            
+      //PARTIDA GANADA REINICIAR PARTIDA
+      let resetBtn = document.querySelector(".button");
+      resetBtn.addEventListener("click", () => {
+        location.reload();
+      });
     }
   });
 });
@@ -52,4 +62,15 @@ function compareArrays(array1, array2) {
     }
   });
   return equalsIndex;
+}
+
+function existLetter(array1, array2){
+  let existIndexArray = [];
+  array2.forEach((element, index) => {
+    if(array1.includes(element)){
+      existIndexArray.push(index)
+      //console.log(`existe letra ${index}`)
+    }
+  });
+  return existIndexArray;
 }
