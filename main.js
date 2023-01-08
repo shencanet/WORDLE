@@ -1,20 +1,17 @@
+let resultElement = document.querySelector('.result')
 let word = "texto";
 let wordArray = word.toUpperCase().split("");
-console.log(wordArray)
+console.log(wordArray);
 let actualRow = document.querySelector(".row");
 
-
-
 wordArray.forEach((item, index) => {
-    if(index === 0){
-    
-        actualRow.innerHTML += `<input type="text" maxlength="1" class="square focus">`;
-    }else{
-        actualRow.innerHTML += `<input type="text" maxlength="1" class="square">`;
-    }
-  
+  if (index === 0) {
+    actualRow.innerHTML += `<input type="text" maxlength="1" class="square focus">`;
+  } else {
+    actualRow.innerHTML += `<input type="text" maxlength="1" class="square">`;
+  }
 });
-let focusElement = document.querySelector('.focus')
+let focusElement = document.querySelector(".focus");
 //console.log(focusElement)
 focusElement.focus();
 
@@ -27,26 +24,32 @@ squares.forEach((element) => {
     userInput.push(event.target.value.toUpperCase());
     console.log(userInput);
     //pasar siguiente letra
-    if(event.target.nextElementSibling){
-        event.target.nextElementSibling.focus();
-    }else{
-        
-        let sameElement = compareArrays(wordArray, userInput);
-        console.log(sameElement);
+    if (event.target.nextElementSibling) {
+      event.target.nextElementSibling.focus();
+    } else {
+      let rightIndex = compareArrays(wordArray, userInput);
+      rightIndex.forEach((element) => {
+        squares[element].classList.add('green');
+      });//los Arrays son iguales ha Ganado
+      if(rightIndex.length == wordArray.length){
+        resultElement.innerHTML = `<p>Ganaste!!!!!</p>
+        <button class="button">Reiniciar</button>`
+
+      }
+
     }
-    
   });
 });
 
-    function compareArrays(array1, array2){
-        let equalsIndex = [];
-        array1.forEach((element, index)=>{
-            if(element == array2[index]){
-                equalsIndex.push(index);
-                console.log(`EN LA POSICION ${index} son iguales`)
-            }else{
-                console.log(`EN LA POSICION ${index} no son iguales`)
-            }
-        })
-        return equalsIndex;
-     };
+function compareArrays(array1, array2) {
+  let equalsIndex = [];
+  array1.forEach((element, index) => {
+    if (element == array2[index]) {
+      equalsIndex.push(index);
+      console.log(`EN LA POSICION ${index} son iguales`);
+    } else {
+      console.log(`EN LA POSICION ${index} no son iguales`);
+    }
+  });
+  return equalsIndex;
+}
