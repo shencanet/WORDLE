@@ -3,6 +3,9 @@ let resultElement = document.querySelector(".result");
 let mainContainer = document.querySelector(".main-container");
 let rowId = 1;
 
+//peticion API
+fetch('https://1000-most-common-words.p.rapidapi.com/words/spanish?words_limit=1')
+.then
 let word = "texto";
 let wordArray = word.toUpperCase().split("");
 console.log(wordArray);
@@ -30,6 +33,11 @@ function listenInput(actualRow) {
       if (event.target.nextElementSibling) {
         event.target.nextElementSibling.focus();
       } else {
+        //CREAR ARREGLO COMPLETO 
+        let squarefilled = document.querySelectorAll('.square')
+        console.log(squarefilled)
+
+
         let rightIndex = compareArrays(wordArray, userInput);
         rightIndex.forEach((element) => {
           squares[element].classList.add("green")})
