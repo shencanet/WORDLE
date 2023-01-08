@@ -4,9 +4,22 @@ let mainContainer = document.querySelector(".main-container");
 let rowId = 1;
 
 //peticion API
-fetch('https://1000-most-common-words.p.rapidapi.com/words/spanish?words_limit=1')
-.then
-let word = "texto";
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '7b0da1adeemsh0be3fff6a70c538p13cb17jsn5b195099a61c',
+		'X-RapidAPI-Host': '1000-most-common-words.p.rapidapi.com'
+	}
+};
+fetch('https://1000-most-common-words.p.rapidapi.com/words/english?words_limit=1', options)
+	.then(response => response.json())
+  .finally(()=>{
+    let loadingElement = document.querySelector('.loading')
+    loadingElement.styles.display='none';
+  })
+	.then(data => {
+      
+let word = data[0] || "texto";
 let wordArray = word.toUpperCase().split("");
 console.log(wordArray);
 let actualRow = document.querySelector(".row");
@@ -132,3 +145,8 @@ function showResult(textMsg) {
     location.reload();
   });
 }
+
+
+  })
+  .catch(err => console.error(err));
+
