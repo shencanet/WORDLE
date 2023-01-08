@@ -1,5 +1,6 @@
 let word = "texto";
-let wordArray = word.split("");
+let wordArray = word.toUpperCase().split("");
+console.log(wordArray)
 let actualRow = document.querySelector(".row");
 
 
@@ -14,7 +15,7 @@ wordArray.forEach((item, index) => {
   
 });
 let focusElement = document.querySelector('.focus')
-console.log(focusElement)
+//console.log(focusElement)
 focusElement.focus();
 
 let squares = document.querySelectorAll(".square");
@@ -29,17 +30,23 @@ squares.forEach((element) => {
     if(event.target.nextElementSibling){
         event.target.nextElementSibling.focus();
     }else{
-        compareArrays(wordArray, userInput);
+        
+        let sameElement = compareArrays(wordArray, userInput);
+        console.log(sameElement);
     }
     
   });
 });
 
     function compareArrays(array1, array2){
+        let equalsIndex = [];
         array1.forEach((element, index)=>{
             if(element == array2[index]){
-                
+                equalsIndex.push(index);
+                console.log(`EN LA POSICION ${index} son iguales`)
+            }else{
+                console.log(`EN LA POSICION ${index} no son iguales`)
             }
         })
-
+        return equalsIndex;
      };
