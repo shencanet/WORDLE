@@ -9,13 +9,14 @@ console.log(wordArray);
 let actualRow = document.querySelector(".row");
 
 drawSquares(actualRow);
+listenInput(actualRow);
 
 let focusElement = document.querySelector(".focus");
 //console.log(focusElement)
 focusElement.focus();
 
-function listenInput() {
-  let squares = document.querySelectorAll(".square");
+function listenInput(actualRow) {
+  let squares = actualRow.querySelectorAll(".square");
   squares = [...squares]; //convierte nodelist en un arreglo
 
   let userInput = [];
@@ -36,11 +37,12 @@ function listenInput() {
         if (rightIndex.length == wordArray.length) {
           resultElement.innerHTML = `<p>Ganaste!!!!!</p>
           <button class="button">Reiniciar</button>`;
+          return ;
         }
-        //NUEVA FILA
+        //CREAR NUEVA FILA
         let actualRow = createRow();
         drawSquares(actualRow);
-        listenInput();
+        listenInput(actualRow);
 
         //CAMBIAR ESTILOS LETRA CORRECT POSICION INCORRECTA
         let existIndexArray = existLetter(wordArray, userInput);
