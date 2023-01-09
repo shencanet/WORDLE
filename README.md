@@ -8,7 +8,6 @@ Con esta aplicacion usamos document.querySelector para pintar las opciones y mej
 
 Encontramos vario sretos a superar como detectar la letra en posicion incorrecta y despues pintar una nueva linea logica de partida ganada 
 pintar los elementos necesarios en la etapa del juego y el boton reiniciar partida 
-
-![CAPTURA ](/asstes/WORDLE.jpg)*cAPTURA*
+(./assets/WORDLE.jpg)*CAPTURA*
 
 deploy https://shencanet.github.io/WORDLE/
