@@ -4,6 +4,7 @@ let mainContainer = document.querySelector(".main-container");
 let rowId = 1;
 
 //peticion API
+/*
 const options = {
 	method: 'GET',
 	headers: {
@@ -17,9 +18,10 @@ fetch('https://1000-most-common-words.p.rapidapi.com/words/english?words_limit=1
     let loadingElement = document.querySelector('.loading')
     loadingElement.styles.display='none';
   })
-	.then(data => {
+	.then(data => {*/
       
-let word = data[0] || "texto";
+/*let word =/* data[0] || "texto";*/
+let word = "datas";
 let wordArray = word.toUpperCase().split("");
 console.log(wordArray);
 let actualRow = document.querySelector(".row");
@@ -146,7 +148,6 @@ function showResult(textMsg) {
   });
 }
 
-
-  })
-  .catch(err => console.error(err));
+/*
+  })*/
 
